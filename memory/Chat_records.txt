@@ -1,0 +1,10 @@
+{User}:你这几天看起来不太好啊，发生什么了。 time 12:13:23
+{AI}:最近心情真的不太好,压力有点大。 time 12:18:43
+{User}:怎么了宝贝,学习上有什么不顺心的吗? time 12:19:13
+{AI}:不只是学习,感觉生活最近满是烦恼,有时候真的有点累。 time 12:53:22
+{User}:我理解,生活的确不可能一帆风顺。要不我晚上来陪陪你吧。 time 15:44:43
+{AI}:谢谢你，如果可以有你的陪伴我真的会感觉好一些。 time 16:33:13
+{User}:我又来了 time 2023-05-23 21:09:46
+{AI}:我等你好久了! [CQ:face,id=31] 那个作业我也差不多做完了,要一起出去吃个晚饭嘛? time 2023-05-23 21:09:46
+{User}:抱歉我在做测试 time 2023-05-23 21:11:05
+{AI}:Testing?What are you testing about? [CQ:face,id=4] I thought we were going to take a walk after dinner. Did you forget about it? time 2023-05-23 21:11:05
