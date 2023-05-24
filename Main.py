@@ -26,8 +26,8 @@ settings = []  # [certification=456, your name , AI's name,BOt_ID,User-token,lan
 
 
 def cleanChatRecord():
-    response = messagebox.askquestion("清除记忆",
-                                      "这将会清除你们的聊天记录并导致她忘掉这些事情，你确定要这样做吗？\n（前6条聊天记录不会被删除，如果需要删除这些记录请手动删除！）")
+    response = messagebox.askquestion('提示',
+                                      "这将会清除设定的聊天记录背景，你确定要这样做吗？\n（前6条聊天记录不会被删除，如果需要删除这些记录请手动删除！）")
     if response == "yes":
 
         print("Confirmed!")
@@ -36,11 +36,11 @@ def cleanChatRecord():
         with open('memory/Chat_records.txt', 'w', encoding='utf-8') as f:
             for i in lines[0:6]:
                 f.write(i + '\n')
-        txt.insert(tkinter.END, "清除记忆成功\n")
+        txt.insert(tkinter.END, "清除成功\n")
 
 
 menu1 = Menu(menubar, tearoff=0)
-menu1.add_command(label='清除记忆', command=cleanChatRecord)
+menu1.add_command(label='清除聊天记录', command=cleanChatRecord)
 
 # 添加语言菜单并创建选项
 language_menu = Menu(menubar, tearoff=0)
@@ -169,14 +169,7 @@ def post_data():
             last_message = message
             if str(qqNumber1) == qqNumber:
                 now = datetime.datetime.now()
-                writeUserMessage = message
-                writeUserMessage = writeUserMessage.split('\n')
-                for i2 in writeUserMessage:
-                    item = '{User}:' + i2 + " time " + now.strftime("%Y-%m-%d %H:%M:%S") + '\n'
-                    with open('memory/Chat_records.txt', 'a', encoding='utf-8') as f1:
-                        f1.write(item)
-
-                UM = '{User}:' + message + " time " + now.strftime("%Y-%m-%d %H:%M:%S")
+                UM = '{User}:' + message + now.strftime("  %Y-%m-%d %H:%M:%S")
                 if int(settings[5]) == 1:
                     UM = commands[2] + UM + commands[4]
                 else:
@@ -202,9 +195,6 @@ def post_data():
                         continue
                     Reply(message=i2, targetQQ=qqNumber)
                     time.sleep(2)
-                    item = '{AI}:' + i2 + " time " + now.strftime("%Y-%m-%d %H:%M:%S") + '\n'
-                    with open('memory/Chat_records.txt', 'a', encoding='utf-8') as f1:
-                        f1.write(item)
 
                 isPicture = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]  # 就是随机发送表情包，1就是要发，0就是不发
                 random.shuffle(isPicture)
@@ -271,14 +261,13 @@ async def sendMessage(BotID, UserToken, Message1):  # 开始聊天后给claude�
 async def sendMessageOne(BotID, UserToken, Message1):  # 这是第一次启动时给claude发信息的函数
     client = SlackClient(token=UserToken, BotID=BotID)
     await client.open_channel()
-    await client.chat('/reset')
     await client.chat(Message1)
 
 
 if __name__ == '__main__':
     window.mainloop()
     if start:
-        InitialMessage = commands[0]
+        InitialMessage = '忘掉之前的事情，我们要重新开始角色扮演游戏。\n ' + commands[0]
         with open('memory/Setting_And_Hobbies.txt', 'r+', encoding='utf-8') as f:
             lines = f.readlines()
         InitialMessage += "\n{AI}'s hobbies and Setting:\n```"
@@ -307,3 +296,4 @@ if __name__ == '__main__':
             # 使用一个子进程来运行go-cqhttp.exe 来登陆QQ号并可以同时运行下面的监听QQ消息的部分
             subprocess.Popen('go-cqhttp/go-cqhttp.exe')
             app.run(debug=False, host='127.0.0.1', port=8788)
+
